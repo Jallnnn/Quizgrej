@@ -3,20 +3,20 @@ function startTimer() {
   myVar = setInterval(function(){myTimer()},1000);
   timelimit = maxtimelimit;
 }
-function myTimer() {
-  if (timelimit > 0) {
-    curmin=Math.floor(timelimit/60);
-    cursec=timelimit%60;
-    if (curmin!=0) { curtime=curmin+" minutes and "+cursec+" seconds left"; }
-              else { curtime=cursec+" seconds left"; }
-    $_('timeleft').innerHTML = curtime;
-  } else {
-    $_('timeleft').innerHTML = timelimit+' - Out of Time - no credit given for answer';
-    clearInterval(myVar);
-  }
-  timelimit--;
-}
-
+function myTimer() { 
+  if (timelimit > 0) { 
+    curmin=Math.floor(timelimit/60); 
+    cursec=timelimit%60; 
+    if (curmin!=0) { curtime=curmin+" minuter och "+cursec+" sekunder kvar"; } 
+              else { curtime=cursec+" sekunder kvar"; } 
+    $_('timeleft').innerHTML = curtime; 
+  } else { 
+    $_('timeleft').innerHTML = timelimit+' - Slut på tiden'; 
+//    clearInterval(myVar); 
+    checkAnswer(); 
+  } 
+  timelimit--; 
+}  
 
 var pos = 0, posn, choice, correct = 0, rscore = 0;
 var maxtimelimit = 20, timelimit = maxtimelimit; 
@@ -39,10 +39,10 @@ function $_(IDS) { return document.getElementById(IDS); }
 function randOrd() { return (Math.round(Math.random())-0.5); }
 function renderResults(){
   var test = $_("test");
-  test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
-  $_("test_status").innerHTML = "Test Completed";
+  test.innerHTML = "<h2>Du fick "+correct+" av "+questions.length+" rätt</h2>";
+  $_("test_status").innerHTML = "Klar";
   $_('timeleft').innerHTML = '';
-  test.innerHTML += '<button onclick="location.reload()">Re-test</a> ';
+  test.innerHTML += '<button onclick="location.reload()">Gör om testet</a> ';
   setQuestionOrder();
   correct = 0;
   clearInterval(myVar);
@@ -51,8 +51,8 @@ function renderResults(){
 }
 function renderQuestion() {
   var test = $_("test");
-  $_("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
-  if (rscore != 0) { $_("test_status").innerHTML += '<br>Currently: '+(correct/rscore*100).toFixed(0)+'% correct'; }
+  $_("test_status").innerHTML = "Fråga "+(pos+1)+" av "+questions.length;
+  if (rscore != 0) { $_("test_status").innerHTML += '<br>Currently: '+(correct/rscore*100).toFixed(0)+'% Rätt'; }
   var question = questions[posn][0];
   var chA = questions[posn][1];
   var chB = questions[posn][2];
@@ -74,7 +74,10 @@ function checkAnswer(){
   }
   rscore++;
   if (choice == questions[posn][4] && timelimit > 0) { correct++;  } else {
-    sweetAlert("haha fel XDDDDDDDDDDDDDDD")
+    swal({   
+      title: "Här är Alexander",
+      text: "Han säger att du svarade fel.",
+      imageUrl: "hasse.jpg" });
   }
   pos++;  posn = questionOrder[pos];
   if (pos < questions.length) { renderQuestion(); } else { renderResults();  }

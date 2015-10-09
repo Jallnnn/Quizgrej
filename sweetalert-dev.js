@@ -1092,8 +1092,8 @@ var setParameters = function setParameters(params) {
     $customIcon.style.backgroundImage = 'url(' + params.imageUrl + ')';
     _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.show($customIcon);
 
-    var _imgWidth = 80;
-    var _imgHeight = 80;
+    var _imgWidth = 200;
+    var _imgHeight = 200;
 
     if (params.imageSize) {
       var dimensions = params.imageSize.toString().split('x');

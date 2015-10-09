@@ -38,3 +38,8 @@ span:hover{
 	border-width:4px 3px 3px 4px;
 	color:#000;
 }
+
+
+.sa-icon.sa-custom {
+	height:200px !important;
+}
