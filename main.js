@@ -47,6 +47,7 @@ function renderResults(){
   correct = 0;
   clearInterval(myVar);
   return false;
+
 }
 function renderQuestion() {
   var test = $_("test");
@@ -72,12 +73,16 @@ function checkAnswer(){
     if (choices[i].checked) { choice = choices[i].value; }
   }
   rscore++;
-  if (choice == questions[posn][4] && timelimit > 0) { correct++; }
+  if (choice == questions[posn][4] && timelimit > 0) { correct++;  } else {
+    sweetAlert("haha fel XDDDDDDDDDDDDDDD")
+  }
   pos++;  posn = questionOrder[pos];
-  if (pos < questions.length) { renderQuestion(); } else { renderResults(); }
+  if (pos < questions.length) { renderQuestion(); } else { renderResults();  }
+
 }
 
 window.onload = function() {
   setQuestionOrder();
   renderQuestion();
 }
+
